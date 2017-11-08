@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="czx.system.dao.LoginDao">
+	<resultMap type="czx.system.bean.User" id="user">
+		<result property="userId" column="userid" javaType="STRING" jdbcType="VARCHAR"/>
+		<result property="userName" column="username" javaType="STRING" jdbcType="VARCHAR"/>
+		<result property="password" column="password" javaType="STRING" jdbcType="VARCHAR"/>
+		<result property="email" column="email" javaType="STRING" jdbcType="VARCHAR"/>
+		<result property="telephone" column="telephone" javaType="STRING" jdbcType="VARCHAR"/>
+		<result property="createtime" column="createtime" javaType="STRING" jdbcType="DATE"/>
+	</resultMap>
+	
+	<select id="login" parameterType="czx.system.bean.User" resultMap="user">
+		select userId,userName,password,email,telephone,createtime from v_sys_user where userid='${userId}' and password='${password}'
+	</select>
+	
+</mapper>
