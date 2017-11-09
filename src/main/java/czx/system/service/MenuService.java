@@ -16,7 +16,9 @@ package czx.system.service;
 
 import java.util.List;
 
+import czx.com.bean.Message;
 import czx.system.bean.Menu;
+import czx.system.bean.MenuItem;
 
 /**  
  * @ClassName	MenuService.java
@@ -29,6 +31,14 @@ import czx.system.bean.Menu;
 public interface MenuService {
 
 	public List<Menu> queryMenuList();
+	
+	public List<MenuItem> getMenuTree(String id);
+	
+	public Message addMenu(MenuItem menu);
+	
+	public Message updateMenu(MenuItem menu);
+	
+	public Message deleteMenu(String id);
 }
 
 

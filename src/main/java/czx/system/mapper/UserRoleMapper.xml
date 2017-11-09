@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="czx.system.dao.UserRoleDao">
+	
+	<resultMap type="czx.system.bean.Role" id="role">
+		<result property="roleId" column="roleid" javaType="int" jdbcType="INTEGER"/>
+		<result property="roleName" column="rolename" javaType="string" jdbcType="VARCHAR"/>
+		<result property="roleType" column="roleType" javaType="int" jdbcType="INTEGER"/>
+		<result property="roleLevel" column="roleLevel" javaType="int" jdbcType="INTEGER"/>
+		<result property="roleOperateLevel" column="roleOperateLevel" javaType="int" jdbcType="INTEGER"/>
+	</resultMap>
+
+	
+	<select id="getUserRoleByUserId" resultMap="role">
+		select a.roleid,a.rolename,b.checked 
+		from sys_role a
+		left join sys_role_user b 
+		on a.roleid=b.roleid and b.userid=#{param1}
+	</select>
+	
+	<delete id="deleteUserRole">
+		delete from sys_role_user where userId = #{param1}	
+	</delete>
+	
+	<insert id="saveUserRole">
+		insert into sys_role_user (userid,roleid,checked) values
+		<foreach collection="list" index="index" item="item" separator=",">
+			 ( #{userId},#{item},1 )
+		</foreach>
+	</insert>
+</mapper>

@@ -17,6 +17,7 @@ package czx.system.dao;
 import java.util.List;
 
 import czx.system.bean.Menu;
+import czx.system.bean.MenuItem;
 
 /**  
  * @ClassName	MenuDao.java
@@ -29,6 +30,17 @@ import czx.system.bean.Menu;
 public interface MenuDao {
 	
 	public List<Menu> queryMenuList();
+	
+	public List<MenuItem> queryMenuTreeChildren(String id);
+	
+	public MenuItem isexist(MenuItem menu);
+	
+	public void addMenu(MenuItem menu);
+	
+	public void updateMenu(MenuItem menu);
+	
+	public void deleteMenu(String id);
+	
 }
 
 

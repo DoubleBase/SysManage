@@ -15,14 +15,21 @@
 package czx.system.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import czx.com.bean.Message;
 import czx.com.controller.BaseController;
+import czx.system.bean.MenuItem;
+import czx.system.service.MenuService;
 
 /**  
  * @ClassName	MenuController.java
@@ -36,12 +43,35 @@ import czx.com.controller.BaseController;
 @Controller
 public class MenuController extends BaseController{
 	
+	@Resource
+	private MenuService menuService;
+	
 	@RequestMapping("/system_Menu!view.do")
 	public ModelAndView view(){
 		Map<String,String> map = new HashMap<String,String>();
 		return new ModelAndView("/system/menu",map);
 	}
 	
+	@ResponseBody
+	@RequestMapping("/system_Menu!getMenuTree.do")
+	public List<MenuItem> getMenuTree(String id){
+		return menuService.getMenuTree(id);
+	}
+	
+	@RequestMapping("/system_Menu!addMenu.do")
+	public Message addMenu(MenuItem menu){
+		return menuService.addMenu(menu);
+	}
+	
+	@RequestMapping("/system_Menu!updateMenu.do")
+	public Message updateMenu(MenuItem menu){
+		return menuService.updateMenu(menu);
+	}
+	
+	@RequestMapping("/system_Menu!deleteMenu.do")
+	public Message deleteMenu(String id){
+		return menuService.deleteMenu(id);
+	}
 	
 }
 

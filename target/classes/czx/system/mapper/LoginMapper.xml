@@ -13,7 +13,7 @@
 	</resultMap>
 	
 	<select id="login" parameterType="czx.system.bean.User" resultMap="user">
-		select userId,userName,password,email,telephone,createtime from v_sys_user where userid='${userId}' and password='${password}'
+		select userId,userName,password,email,telephone,createtime from v_sys_user where userid=#{userId} and password=#{password}
 	</select>
 	
 </mapper>

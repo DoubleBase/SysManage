@@ -14,6 +14,11 @@
  */
 package czx.system.dao;
 
+import java.util.List;
+import java.util.Map;
+
+import czx.system.bean.User;
+
 /**  
  * @ClassName	UserDao.java
  * @Package  	czx.sys.dao
@@ -24,6 +29,17 @@ package czx.system.dao;
  */
 public interface UserDao {
 
+	public int queryUserCount();
+	
+	public List<User> queryUserList(int offset,int limit);
+	
+	public User isexist(User user);
+	
+	public void addUser(User user);
+	
+	public void updateUser(User user);
+
+	public void deleteUser(Map<String,Object> list);
 }
 
 

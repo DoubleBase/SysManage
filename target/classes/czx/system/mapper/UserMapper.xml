@@ -3,14 +3,54 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 
 <mapper namespace="czx.system.dao.UserDao">
-	<select id="queryUserList" resultType="czx.system.bean.User">
-		select testId,testName from testTable
+	
+	<resultMap id="resultOfInteger" type="java.lang.Integer">
+		<result column="total" property="total" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap type="czx.system.bean.User" id="user">
+		<result property="userId" column="userid" javaType="STRING" jdbcType="VARCHAR"/>
+		<result property="userName" column="username" javaType="STRING" jdbcType="VARCHAR"/>
+		<result property="password" column="password" javaType="STRING" jdbcType="VARCHAR"/>
+		<result property="email" column="email" javaType="STRING" jdbcType="VARCHAR"/>
+		<result property="telephone" column="telephone" javaType="STRING" jdbcType="VARCHAR"/>
+		<result property="createtime" column="createtime" javaType="STRING" jdbcType="DATE"/>
+	</resultMap>
+
+	<select id="queryUserCount" resultMap="resultOfInteger">
+		select count(1) total from sys_user
 	</select>
 	
-	<select id="queryUserById" resultType="czx.system.bean.User">
-		
+	<select id="queryUserList" resultMap="user">
+		select userid,username,password,email,telephone,createtime from sys_user
+		<if test="param1!=-1">
+			limit ${param1},${param2}
+		</if>
 	</select>
 	
+	<select id="isexist" resultMap="user">
+		select userid from sys_user where userid = #{userId}
+	</select>
 	
+	<insert id="addUser">
+		insert into sys_user(userid,username,password,email,telephone,createtime)
+		values (#{userId},#{userName},#{password},#{email},#{telephone},#{createtime})
+	</insert>
+	
+	<update id="updateUser">
+		update sys_user
+		set username = #{userName},
+			email = #{email},
+			telephone = #{telephone}
+		where userid = #{userId}
+	</update>
+	
+	<delete id="deleteUser">
+		delete from sys_user
+		where userid in 
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item.userId}
+		</foreach>
+	</delete>
 	
 </mapper>

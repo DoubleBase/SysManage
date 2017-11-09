@@ -14,6 +14,8 @@
  */
 package czx.com.bean;
 
+import czx.com.util.ExceptionDealUtil;
+
 /**  
  * @ClassName	Message.java
  * @Package  	czx.com.bean

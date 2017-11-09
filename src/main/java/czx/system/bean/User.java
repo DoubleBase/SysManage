@@ -30,6 +30,7 @@ public class User {
 	private String email;
 	private String telephone;
 	private String createtime;
+	private String checked;
 	
 	public String getUserId() {
 		return userId;
@@ -66,6 +67,12 @@ public class User {
 	}
 	public void setCreatetime(String createtime) {
 		this.createtime = createtime;
+	}
+	public String getChecked() {
+		return checked;
+	}
+	public void setChecked(String checked) {
+		this.checked = checked;
 	}
 	
 }

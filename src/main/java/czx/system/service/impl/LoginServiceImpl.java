@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import czx.com.bean.Message;
 import czx.com.controller.BaseController;
+import czx.com.util.ExceptionDealUtil;
 import czx.system.bean.User;
 import czx.system.dao.LoginDao;
 import czx.system.service.LoginService;
@@ -52,7 +53,7 @@ public class LoginServiceImpl implements LoginService {
 			if(loginUser!=null){
 				session.setAttribute(BaseController.SESSION_USER, loginUser);
 				msg.setSuccess(true);
-				msg.setMessage("登录成功");
+				msg.setMessage("登录成功!");
 			}else{
 				msg.setSuccess(false);
 				msg.setMessage("登录失败:用户名或密码错误!");
@@ -60,7 +61,7 @@ public class LoginServiceImpl implements LoginService {
 		}catch(Exception e){
 			log.error(e.getMessage(),e);
 			msg.setSuccess(false);
-			msg.setMessage("登录失败:"+e.getMessage());
+			msg.setMessage("登录失败:" + ExceptionDealUtil.getMessage(e));
 		}
 		return msg;
 	}
