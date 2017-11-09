@@ -41,7 +41,7 @@
 		order by sort
 	</select>
 	
-	<select id="isexit" resultMap="menu">
+	<select id="isexist" resultMap="menu">
 		select id from sys_menu where id=#{id}
 	</select>
 	

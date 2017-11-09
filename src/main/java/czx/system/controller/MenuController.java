@@ -58,16 +58,19 @@ public class MenuController extends BaseController{
 		return menuService.getMenuTree(id);
 	}
 	
+	@ResponseBody
 	@RequestMapping("/system_Menu!addMenu.do")
 	public Message addMenu(MenuItem menu){
 		return menuService.addMenu(menu);
 	}
 	
+	@ResponseBody
 	@RequestMapping("/system_Menu!updateMenu.do")
 	public Message updateMenu(MenuItem menu){
 		return menuService.updateMenu(menu);
 	}
 	
+	@ResponseBody
 	@RequestMapping("/system_Menu!deleteMenu.do")
 	public Message deleteMenu(String id){
 		return menuService.deleteMenu(id);

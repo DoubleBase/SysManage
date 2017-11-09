@@ -131,14 +131,14 @@ showMenuModal = function(){
 }
 
 saveMenu = function(){
-	if(!checkValid()){
-		return;
+	if(checkValid()){
+		return false;
 	}
-	var url = "/system_Menu!updateMenu.do";
+	var url = "system_Menu!updateMenu.do";
 	if(optType=="add"){
-		url = "/system_Menu!addMenu.do";
+		url = "system_Menu!addMenu.do";
 	}else if(optType=="edit"){
-		url = "/system_Menu!updateMenu.do";
+		url = "system_Menu!updateMenu.do";
 	}
 	App.blockUI({
 		boxed : true ,
