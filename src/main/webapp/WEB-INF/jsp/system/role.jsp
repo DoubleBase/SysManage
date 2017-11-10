@@ -26,6 +26,7 @@
 						<button class="btn btn-primary" id="btn_edit"><i class="fa fa-pencil"></i>&nbsp;修改</button>
 						<button class="btn btn-danger" id="btn_delete"><i class="fa fa-minus"></i>&nbsp;删除</button>
 						<button class="btn btn-info" id="btn_bindUser"><i class="fa fa-link"></i>&nbsp;绑定用户</button>
+						<button class="btn btn-info" id="btn_bindMenu"><i class="fa fa-link"></i>&nbsp;绑定菜单</button>
 					</div>
 				</div>
 				<div style="display:none;">
@@ -127,5 +128,31 @@
 			</div>
 		</div>
 		
+		<div id="bdMenu" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="MenuModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 id="MenuModalLabel" class="modal-title">
+							Modal title
+						</h4>
+
+					</div>
+					<div class="modal-body">
+						<div id="RoleMenutable"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" id="btn_menu_save">
+							<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;保存
+						</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;取消
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
   </body>
 </html>

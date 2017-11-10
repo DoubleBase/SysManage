@@ -17,8 +17,8 @@ package czx.system.dao;
 import java.util.List;
 import java.util.Map;
 
+import czx.system.bean.MenuTree;
 import czx.system.bean.Role;
-import czx.system.bean.User;
 
 /**  
  * @ClassName	RoleDao.java
@@ -40,6 +40,13 @@ public interface RoleDao {
 	public void updateRole(Role role);
 
 	public void deleteRole(Map<String,Object> list);
+	
+	public List<MenuTree> getRoleMenuByRoleId(String roldId);
+	
+	public void addRoleMenu(Map<String,Object> list);
+	
+	public void deleteRoleMenu(int roleId);
+	
 }
 
 

@@ -18,6 +18,7 @@ import java.util.List;
 
 import czx.com.bean.Message;
 import czx.com.bean.PagingGrid;
+import czx.system.bean.MenuTree;
 import czx.system.bean.Role;
 
 /**  
@@ -36,6 +37,11 @@ public interface RoleService {
 	public Message updateRole(Role role);
 	
 	public Message deleteRole(List<Role> list);
+	
+	public List<MenuTree> getRoleMenuByRoleId(String roleId);
+	
+	public Message saveRoleMenu(int roleId,String menuIds);
+	
 }
 
 

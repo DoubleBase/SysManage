@@ -7,6 +7,7 @@ includeComJs = function(path){
 
 includeComCss("resource/superui/ui/global/bootstrap/css/bootstrap.min.css");
 includeComCss('resource/superui/plugins/bootstrap-table/bootstrap-table.css');
+includeComCss('resource/com/bootstrap/css/bootstrap-treeview.min.css');
 includeComCss("resource/superui/ui/global/font-awesome/css/font-awesome.css");
 includeComCss("resource/superui/adminlte/dist/css/AdminLTE.css");
 includeComCss("resource/superui/adminlte/dist/css/skins/_all-skins.css");
@@ -16,6 +17,7 @@ includeComCss('resource/superui/plugins/jstree/dist/themes/default/style.min.css
 includeComJs("resource/superui/ui/global/jQuery/jquery.min.js");
 includeComJs("resource/superui/ui/global/bootstrap/js/bootstrap.min.js");
 includeComJs('resource/superui/plugins/bootstrap-table/bootstrap-table.js');
+includeComJs('resource/com/bootstrap/js/bootstrap-treeview.min.js');
 includeComJs('resource/superui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js');
 
 

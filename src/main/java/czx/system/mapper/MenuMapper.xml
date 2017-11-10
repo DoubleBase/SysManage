@@ -27,8 +27,43 @@
 		<result column="isleaf" property="isleaf" javaType="INT" jdbcType="INTEGER" />
 	</resultMap>
 	
+	<resultMap type="czx.system.bean.Role" id="role">
+		<result property="roleId" column="roleid" javaType="int" jdbcType="INTEGER"/>
+		<result property="roleName" column="rolename" javaType="string" jdbcType="VARCHAR"/>
+		<result property="roleType" column="roleType" javaType="int" jdbcType="INTEGER"/>
+		<result property="roleLevel" column="roleLevel" javaType="int" jdbcType="INTEGER"/>
+		<result property="roleOperateLevel" column="roleOperateLevel" javaType="int" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<resultMap type="czx.system.bean.Fun" id="fun">
+		<result property="funId" column="funid" javaType="int" jdbcType="INTEGER"/>
+		<result property="funName" column="funname" javaType="String" jdbcType="VARCHAR"/>
+		<result property="icon" column="icon" javaType="String" jdbcType="VARCHAR"/>
+		<result property="qtip" column="qtip" javaType="String" jdbcType="VARCHAR"/>
+		<result property="menuId" column="menuId" javaType="int" jdbcType="INTEGER"/>
+		<result property="funtypeId" column="funtypeId" javaType="int" jdbcType="INTEGER"/>
+		<result property="orders" column="orders" javaType="int" jdbcType="INTEGER"/>
+		<result property="cls" column="cls" javaType="String" jdbcType="VARCHAR"/>
+		<result property="url" column="url" javaType="String" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	
 	<select id="queryMenuList" resultMap="menu">
-		select id,pid,text,url,targetType,icon,sort,isHeader from sys_menu
+		<!-- select distinct a.id,a.pid,a.text,a.url,a.icon,a.targetType,a.sort,a.isHeader,a.isLeaf 
+		from sys_menu a,sys_role_menu b,sys_role_user c
+		where a.id=b.menuid and b.roleid=c.roleid and c.userid=#{userId}
+		order by a.sort
+		 -->
+		select id,pid,text,url,icon,targetType,sort,isHeader,isLeaf  from (
+			select distinct a.id,a.pid,a.text,a.url,a.icon,a.targetType,a.sort,a.isHeader,a.isLeaf 
+			from sys_menu a,sys_role_menu b,sys_role_user c
+			where a.id=b.menuid and b.roleid=c.roleid and c.userid=#{userId}
+			union  
+			select t.id,t.pid,t.text,t.url,t.icon,t.targetType,t.sort,t.isHeader,t.isLeaf from sys_menu t where id in(
+			select distinct a.pid
+			from sys_menu a,sys_role_menu b,sys_role_user c
+			where a.id=b.menuid and b.roleid=c.roleid and c.userid=#{userId})
+		) t order by sort
 	</select>
 	
 	<select id="queryMenuTreeChildren" resultMap="menuTreeList">
@@ -63,6 +98,60 @@
 	
 	<delete id="deleteMenu">
 		delete from sys_menu where id=#{param1}
+	</delete>
+	
+	<select id="getMenuRoleByMenuId" resultMap="role">
+		select a.roleid,a.rolename,b.checked from sys_role a 
+		left join sys_role_menu b
+		on a.roleid=b.roleid and b.menuid=#{param1}
+	</select>
+	
+	<delete id="deleteMenuRole">
+		delete from sys_role_menu where menuId = #{param1} 
+	</delete>
+	
+	<insert id="addMenuRole">
+		insert into sys_role_menu (menuid,roleid,checked) values
+		<foreach collection="list" index="index" item="item" separator=",">
+		 ( #{menuId},#{item},1 )
+		</foreach>
+	</insert>
+	
+	<select id="queryFunByMenuId" resultMap="fun">
+		select funid,funname,icon,qtip,menuId,funtypeId,orders,cls,url 
+		from sys_function where menuId=#{param1}
+		<if test="param2!=-1">
+			limit ${param2},${param3}
+		</if>
+	</select>
+	
+	<select id="isexistFun" resultMap="fun">
+		select funid from sys_function where funid=#{funId}
+	</select>
+	
+	<insert id="addMenuFun">
+		insert into sys_function(funid,funname,icon,qtip,menuId,funtypeId,orders,cls,url)
+		values (#{funId},#{funName},#{icon},#{qtip},#{menuId},#{funtypeId},#{orders},#{cls},#{url})
+	</insert>
+	
+	<update id="updateMenuFun">
+		update sys_function
+		set funname=#{funName},
+			icon=#{icon},
+			qtip=#{qtip},
+			funtypeId=#{funtypeId},
+			orders=#{orders},
+			cls=#{cls},
+			url=#{url}
+		where funId=#{funId}
+	</update>
+	
+	<delete id="deleteMenuFun">
+		delete from sys_function
+		where funid in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+			${item}
+		</foreach>
 	</delete>
 	
 </mapper>

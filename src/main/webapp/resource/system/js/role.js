@@ -109,10 +109,17 @@ initListeners = function(){
 		saveRole();
 	});
 	
+	$("#btn_bindMenu").on('click',function(){
+		bindRoleMenu();
+	})
+	
 	$("#btn_bindUser").on('click',function(){
 		bindRoleUser();
 	})
 	
+	$("#btn_menu_save").on('click',function(){
+		saveRoleMenu();
+	})
 }
 
 var optRole = 'add';
@@ -209,6 +216,89 @@ bindRoleUser = function(){
 		url:"system_RoleUser!view.do?roleId="+rows[0].roleId,
 		callback:function(){
 			
+		}
+	})
+}
+
+var roleId;
+var selectNode = [];
+bindRoleMenu = function(){
+	var rows = $("#table_resource").bootstrapTable("getSelections");
+	if(rows.length==0){
+		$.fn.modalAlert("请选择一需要绑定菜单的角色","warning");
+		return;
+	}else if(rows.length>1){
+		$.fn.modalAlert("只能选择一个绑定菜单的角色","warning");
+		return;
+	}
+	roleId = rows[0].roleId;
+	$("#MenuModalLabel").text("绑定菜单");
+	$("#bdMenu").modal("show");
+	$('#RoleMenutable').data('jstree', false).empty();
+	$('#RoleMenutable').jstree({
+		"core" : {
+			"animation" : 0,
+			"check_callback" : true,
+			"themes" : {
+				"stripes" : true
+			},
+			'data' : {
+				'url':'system_Role!getRoleMenuByRoleId.do?roleId='+rows[0].roleId
+			}
+		},
+		"types" : {
+			"root" : {
+				"icon": "fa fa-folder icon-state-warning icon-lg",
+				"valid_children" : [ "default" ]
+			},
+			"default" : {
+				"valid_children" : [ "default", "file" ]
+			},
+			"file" : {
+				 "icon": "fa fa-file icon-state-warning icon-lg",
+				 "valid_children" : []
+			}
+		},
+		"plugins" : ["checkbox","types","wholerow"],
+		"checkbox":{
+			"cascade":"up+undetermined",
+			"three_state": false
+		}
+	}).on("changed.jstree",function(e,data){
+		selectNode = data.selected;
+	});
+	
+}
+
+saveRoleMenu = function(){
+	var menuIds = "";
+	for(var i=0;i<selectNode.length;i++){
+		menuIds = menuIds + selectNode[i] + ",";
+	}
+	menuIds = menuIds.substring(0,menuIds.length-1);
+	App.blockUI({
+		boxed : true ,
+		message: '处理中，请稍等...'
+	});
+	$.ajax({
+		type:'post',
+		url:'system_Role!saveRoleMenu.do',
+		data:{
+			roleId:roleId,
+			menuIds:menuIds
+		},
+		success:function(data){
+			 App.unblockUI();
+			if(data.success){
+				$('#bdMenu').modal('hide');
+				$.fn.modalMsg(data.message,"success");
+			}else{
+				$.fn.modalAlert(data.message,"error");
+			}
+		},
+		error:function(){
+			 App.unblockUI();
+			$.fn.modalAlert("请求失败!","error");
 		}
 	})
 }

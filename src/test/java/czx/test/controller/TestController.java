@@ -14,6 +14,9 @@
  */
 package czx.test.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -49,6 +52,20 @@ public class TestController extends AbstractController{
 			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public static void main(String[] args) {
+		String source = "2211";
+		String split = ",";
+		
+		List<String> dest = new ArrayList<String>();
+       
+        String[] arr = source.split(split);
+        for (String s : arr){
+        	System.out.println(s);
+            dest.add(s);
+        }
+       System.out.println(dest.size());
 	}
 }
 

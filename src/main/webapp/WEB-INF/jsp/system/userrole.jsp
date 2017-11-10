@@ -30,6 +30,8 @@
                       </div>
                       <table id="table_resource"></table>
                   </div>
+                </div>
+              </div>
 	    </section>
 	</div>
 </body>

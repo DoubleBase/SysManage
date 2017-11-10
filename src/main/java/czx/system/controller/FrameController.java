@@ -51,7 +51,7 @@ public class FrameController extends BaseController{
 		map.put("username", getSessionUser().getUserName());
 		map.put("userId", getSessionUser().getUserId());
 		
-		List<Menu> menu = menuService.queryMenuList();
+		List<Menu> menu = menuService.queryMenuList(getSessionUser());
 		map.put("menus",JSONArray.fromObject(menu).toString());
 		
 		return new ModelAndView("/system/frame",map);

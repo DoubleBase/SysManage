@@ -69,8 +69,9 @@ buildGrid = function(){
 	});
 }
 
+showResetPwd = function(){
 
-
+}
 
 initListeners = function(){
 	$("#btn_add").on('click',function(){
@@ -246,5 +247,4 @@ bindUserRole = function(){
 			
 		}
 	})
-	
 }

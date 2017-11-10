@@ -27,7 +27,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import czx.com.bean.Message;
+import czx.com.bean.PagingGrid;
 import czx.com.controller.BaseController;
+import czx.system.bean.Fun;
 import czx.system.bean.MenuItem;
 import czx.system.service.MenuService;
 
@@ -74,6 +76,42 @@ public class MenuController extends BaseController{
 	@RequestMapping("/system_Menu!deleteMenu.do")
 	public Message deleteMenu(String id){
 		return menuService.deleteMenu(id);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/system_Menu!getMenuRoleByMenuId.do")
+	public PagingGrid getMenuRoleByMenuId(String menuId){
+		return menuService.getMenuRoleByMenuId(menuId);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/system_Menu!saveMenuRole.do")
+	public Message saveMenuRole(String menuId,String roleIds){
+		return menuService.saveMenuRole(menuId, roleIds);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/system_Menu!queryFunByMenuId.do")
+	public PagingGrid queryFunByMenuId(int menuId,int offset,int limit){
+		return menuService.queryFunByMenuId(menuId, offset, limit);
+	}
+
+	@ResponseBody
+	@RequestMapping("/system_Menu!addMenuFun.do")
+	public Message addMenuFun(Fun fun){
+		return menuService.addMenuFun(fun);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/system_Menu!updateMenuFun.do")
+	public Message updateMenuFun(Fun fun){
+		return menuService.updateMenuFun(fun);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/system_Menu!deleteMenuFun.do")
+	public Message deleteMenuFun(String funIds){
+		return menuService.deleteMenuFun(funIds);
 	}
 	
 }

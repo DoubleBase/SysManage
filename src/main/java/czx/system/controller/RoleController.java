@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import czx.com.bean.Message;
 import czx.com.bean.PagingGrid;
 import czx.com.controller.BaseController;
+import czx.system.bean.MenuTree;
 import czx.system.bean.Role;
 import czx.system.service.RoleService;
 
@@ -76,6 +77,19 @@ public class RoleController extends BaseController {
 		List<Role> list = JSONArray.toList(JSONArray.fromObject(request.getParameter("dataList")), Role.class);
 		return roleService.deleteRole(list);
 	}
+	
+	@ResponseBody
+	@RequestMapping("/system_Role!getRoleMenuByRoleId.do")
+	public List<MenuTree> getRoleMenuByRoleId(String roleId){
+		return roleService.getRoleMenuByRoleId(roleId);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/system_Role!saveRoleMenu.do")
+	public Message saveRoleMenu(int roleId,String menuIds){
+		return roleService.saveRoleMenu(roleId, menuIds);
+	}
+	
 }
 
 

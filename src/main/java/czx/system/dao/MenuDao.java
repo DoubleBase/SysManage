@@ -15,9 +15,13 @@
 package czx.system.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import czx.system.bean.Fun;
 import czx.system.bean.Menu;
 import czx.system.bean.MenuItem;
+import czx.system.bean.Role;
+import czx.system.bean.User;
 
 /**  
  * @ClassName	MenuDao.java
@@ -29,7 +33,7 @@ import czx.system.bean.MenuItem;
  */
 public interface MenuDao {
 	
-	public List<Menu> queryMenuList();
+	public List<Menu> queryMenuList(User user);
 	
 	public List<MenuItem> queryMenuTreeChildren(String id);
 	
@@ -40,6 +44,22 @@ public interface MenuDao {
 	public void updateMenu(MenuItem menu);
 	
 	public void deleteMenu(String id);
+	
+	public List<Role> getMenuRoleByMenuId(String menuId);
+	
+	public void deleteMenuRole(String menuId);
+	
+	public void addMenuRole(Map<String,Object> param);
+	
+	public List<Fun> queryFunByMenuId(int menuId,int offset,int limit);
+	
+	public Fun isexistFun(Fun fun);
+	
+	public void addMenuFun(Fun fun);
+	
+	public void updateMenuFun(Fun fun);
+	
+	public void deleteMenuFun(Map<String,Object> param);
 	
 }
 

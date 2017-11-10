@@ -17,8 +17,11 @@ package czx.system.service;
 import java.util.List;
 
 import czx.com.bean.Message;
+import czx.com.bean.PagingGrid;
+import czx.system.bean.Fun;
 import czx.system.bean.Menu;
 import czx.system.bean.MenuItem;
+import czx.system.bean.User;
 
 /**  
  * @ClassName	MenuService.java
@@ -30,7 +33,7 @@ import czx.system.bean.MenuItem;
  */
 public interface MenuService {
 
-	public List<Menu> queryMenuList();
+	public List<Menu> queryMenuList(User user);
 	
 	public List<MenuItem> getMenuTree(String id);
 	
@@ -39,6 +42,19 @@ public interface MenuService {
 	public Message updateMenu(MenuItem menu);
 	
 	public Message deleteMenu(String id);
+	
+	public PagingGrid getMenuRoleByMenuId(String menuId);
+	
+	public Message saveMenuRole(String menuId,String roleIds);
+	
+	public PagingGrid queryFunByMenuId(int menuId,int offset,int limit);
+	
+	public Message addMenuFun(Fun fun);
+	
+	public Message updateMenuFun(Fun fun);
+	
+	public Message deleteMenuFun(String funIds);
+	
 }
 
 

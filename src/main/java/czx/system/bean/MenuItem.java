@@ -33,6 +33,7 @@ public class MenuItem {
 	private boolean children;
 	private int sort;
 	private int isleaf;
+	private String checked;
 	
 	public String getId() {
 		return id;
@@ -93,6 +94,12 @@ public class MenuItem {
 	}
 	public void setIsleaf(int isleaf) {
 		this.isleaf = isleaf;
+	}
+	public String getChecked() {
+		return checked;
+	}
+	public void setChecked(String checked) {
+		this.checked = checked;
 	}
 }
 

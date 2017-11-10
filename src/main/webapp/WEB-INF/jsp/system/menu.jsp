@@ -30,6 +30,7 @@
 							<button class="btn btn-success" id="btn_add"><i class="fa fa-plus"></i>&nbsp;添加</button>
 							<button class="btn btn-primary" id="btn_edit"><i class="fa fa-pencil"></i>&nbsp;修改</button>
 							<button class="btn btn-danger" id="btn_delete"><i class="fa fa-minus"></i>&nbsp;删除</button>
+							<button class="btn btn-info" id="btn_bindRole"><i class="fa fa-link"></i>&nbsp;绑定角色</button>
 						</div>
 					</div>
 					<div style="display:none;">
@@ -53,7 +54,7 @@
 							<button type="submit" class="btn btn-success" id="addFun">
 								<i class="glyphicon glyphicon-plus"></i>添加功能
 							</button>
-							<button type="submit" class="btn btn-warning" id="modFun">
+							<button type="submit" class="btn btn-warning" id="editFun">
 								<i class="glyphicon glyphicon-pencil"></i>修改功能
 							</button>
 							<button type="submit" class="btn btn-danger" id="delFun">
@@ -152,5 +153,138 @@
 		</div>
 	</div>
 	
+	<div id="menuFunModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fun_ModalLabel" style="height:500px;">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 id="fun_ModalLabel" class="modal-title">
+							Modal title
+						</h4>
+					</div>
+					<div class="col-md-12">
+						<div class="box box-info">
+							<div class="box-header">
+								<i class="fa fa-cogs"></i>
+								<h3 class="box-title">功能详情</h3>
+							</div>
+							<form class="form-horizontal">
+								<div class="box-body">
+									<div class="form-group">
+				                        <label for="o_id" class="col-sm-3 control-label">功能ID</label>
+				                        <div class="col-sm-9">
+				                            <input type="text" class="form-control funNotNull" id="o_id" placeholder="功能ID" >
+				                        </div>
+				                    </div>
+									<div class="form-group">
+				                        <label for="o_text" class="col-sm-3 control-label">功能名称</label>
+				                        <div class="col-sm-9">
+				                            <input type="text" class="form-control funNotNull" id="o_text" placeholder="功能名称" >
+				                        </div>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="o_icon" class="col-sm-3 control-label">图标样式</label>
+				                        <div class="col-sm-9">
+				                            <input type="text" class="form-control" id="o_icon" placeholder="图标样式" > 
+				                        </div>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="o_qtip" class="col-sm-3 control-label">提示信息</label>
+				                        <div class="col-sm-9">
+				                            <input type="text" class="form-control" id="o_qtip" placeholder="提示信息" >
+				                        </div>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="o_url" class="col-sm-3 control-label">菜单链接</label>
+				                        <div class="col-sm-9">
+				                        	<select class="form-control" id="o_url" placeholder="菜单链接" >
+			                                 	<option value="btn_add">添加</option>
+			                                 	<option value="btn_edit">修改</option>
+			                                 	<option value="btn_delete">删除</option>
+			                                 	<option value="btn_role">角色</option>
+			                                 	<option value="btn_user">用户</option>
+			                                 	<option value="btn_menu">菜单</option>
+			                            	</select>
+				                        </div>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="o_orders" class="col-sm-3 control-label">排序号</label>
+				                        <div class="col-sm-9">
+				                            <input type="text" class="form-control" id="o_orders" placeholder="排序号" >
+				                        </div>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="o_functionTypeId" class="col-sm-3 control-label">功能类型ID</label>
+				                        <div class="col-sm-9">
+				                        	<select class="form-control funNotNull" id="o_functionTypeId" placeholder="功能类型ID" >
+			                                 	<option value="1001">添加</option>
+			                                 	<option value="1002">修改</option>
+			                                 	<option value="1003">删除</option>
+			                                 	<option value="1004">权限</option>
+			                            	</select>
+				                        </div>
+				                    </div>
+				                    <div class="form-group">
+			                             <label for="o_cls" class="col-sm-3 control-label">按钮样式</label>
+			                             <div class="col-sm-9">
+			                            	 <select class="form-control" id="o_cls" placeholder="按钮样式" >
+			                                 	<option value="btn-success">btn-success</option>
+			                                 	<option value="btn-warning">btn-warning</option>
+			                                 	<option value="btn-danger">btn-danger</option>
+			                                 	<option value="btn-info">btn-info</option>
+			                                 	<option value="btn-inverse">btn-inverse</option>
+			                                 	<option value="btn-default">btn-default</option>
+			                                 	<option value="btn-primary">btn-primary</option>
+			                            	</select>
+			                             </div>
+				                    </div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" id="btn_fun_save">
+							<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;保存
+						</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;取消
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	<div id="menuRoleModal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 id="menu_modalLabel" class="modal-title">
+						绑定角色
+					</h4>
+				</div>
+				<div class="box box-success">
+					<div class="container-fluid">
+				        <div class="row">
+			               <div class="col-md-12">
+			                  <div class="box-body" style="padding-bottom:5px;">
+			                      <div id="menuRole_toolbar" class="btn-group">
+			                          <button id="btn_menurole_save" type="button" class="btn btn-success">
+			                              <i class="fa fa-save"></i>&nbsp;保存
+			                          </button>
+			                      </div>
+			                      <table id="menuRole_table"></table>
+			                  </div>
+		                 	</div>
+		                </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
   </body>
 </html>

@@ -17,6 +17,31 @@
 		<result property="roleOperateLevel" column="roleOperateLevel" javaType="int" jdbcType="INTEGER"/>
 	</resultMap>
 
+	<!-- 
+	<resultMap id="menuTree" type="czx.system.bean.MenuItem">
+		<result column="id" property="id" javaType="String" jdbcType="VARCHAR" />
+		<result column="parent" property="parent" javaType="String" jdbcType="VARCHAR" />
+		<result column="text" property="text" javaType="String" jdbcType="VARCHAR" />
+		<result column="url" property="url" javaType="String" jdbcType="VARCHAR" />
+		<result column="targetType" property="targetType" javaType="String" jdbcType="VARCHAR" />
+		<result column="type" property="type" javaType="String" jdbcType="VARCHAR" />
+		<result column="children" property="children" javaType="boolean" jdbcType="VARCHAR" />
+		<result column="icon" property="icon" javaType="String" jdbcType="VARCHAR" />
+		<result column="sort" property="sort" javaType="INT" jdbcType="INTEGER" />
+		<result column="isleaf" property="isleaf" javaType="INT" jdbcType="INTEGER" />
+		<result column="checked" property="checked" javaType="String" jdbcType="INTEGER"/>
+	</resultMap>
+	 -->
+	<resultMap id="menuTree" type="czx.system.bean.MenuTree">
+		<result column="id" property="id" javaType="String" jdbcType="VARCHAR" />
+		<result column="pid" property="pid" javaType="String" jdbcType="VARCHAR" />
+		<result column="text" property="text" javaType="String" jdbcType="VARCHAR" />
+		<result column="url" property="url" javaType="String" jdbcType="VARCHAR" />
+		<result column="icon" property="icon" javaType="String" jdbcType="VARCHAR" />
+		<result column="sort" property="sort" javaType="INT" jdbcType="INTEGER" />
+		<result column="checked" property="checked" javaType="String" jdbcType="INTEGER"/>
+	</resultMap>
+	
 	<select id="queryRoleCount" resultMap="resultOfInteger">
 		select count(1) total from sys_role
 	</select>
@@ -52,6 +77,28 @@
 		<foreach collection="list" item="item" open="(" separator="," close=")">
 			#{item.roleId}
 		</foreach>
+	</delete>
+	
+	<select id="getRoleMenuByRoleId" resultMap="menuTree">
+		select a.id,a.pid,a.text,url,a.icon,a.sort,a.isleaf,
+		if(b.checked=1,'true','false') checked 
+		from sys_menu a 
+		left join 
+		sys_role_menu b
+		on
+		a.id = b.menuid and b.roleid=#{param1}
+		order by a.sort
+	</select>
+	
+	<insert id="addRoleMenu">
+		insert into sys_role_menu (menuid,roleid,checked) values 
+		<foreach collection="list" index="index" item="item" separator=",">
+			(#{item},#{roleId},1)
+		</foreach>
+	</insert>
+	
+	<delete id="deleteRoleMenu">
+		delete from sys_role_menu where roleId=#{param1}
 	</delete>
 	 
 </mapper>
