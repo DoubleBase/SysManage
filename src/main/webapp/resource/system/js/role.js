@@ -109,11 +109,11 @@ initListeners = function(){
 		saveRole();
 	});
 	
-	$("#btn_bindMenu").on('click',function(){
+	$("#btn_menu").on('click',function(){
 		bindRoleMenu();
 	})
 	
-	$("#btn_bindUser").on('click',function(){
+	$("#btn_user").on('click',function(){
 		bindRoleUser();
 	})
 	

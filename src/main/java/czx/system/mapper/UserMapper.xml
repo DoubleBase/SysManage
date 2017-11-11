@@ -53,4 +53,8 @@
 		</foreach>
 	</delete>
 	
+	<update id="resetPwd">
+		update sys_user set password = #{param2} where userid=#{param1}
+	</update>
+	
 </mapper>

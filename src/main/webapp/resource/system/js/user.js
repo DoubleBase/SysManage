@@ -61,6 +61,9 @@ buildGrid = function(){
 		},{
 			field : 'reset',
 			title : '重置密码',
+			formatter:function(value, row, index){
+				return "<div class='btn btn-primary' onclick='showRestPwd("+row.userId+")'><i class='fa fa-history'></i></div>";
+			},
 			width : 40
 		}],
 		onDblClickCell : function(field, value, row, $element) {
@@ -109,8 +112,12 @@ initListeners = function(){
 		saveUser();
 	});
 	
-	$("#btn_bindRole").on('click',function(){
+	$("#btn_role").on('click',function(){
 		bindUserRole();
+	})
+	
+	$("#btn_reset").on('click',function(){
+		resultPwd();
 	})
 }
 
@@ -247,4 +254,57 @@ bindUserRole = function(){
 			
 		}
 	})
+}
+
+var resetUserId;
+showRestPwd = function(row){
+	
+	$('#o_pwd').val(DEFAULT_PASSWORD);
+	$('#o_rePwd').val(DEFAULT_PASSWORD);
+	$("#reset_Label").text('修改用户');
+	$('#resetPwdModal').modal('show');
+	resetUserId = row;
+}
+
+resultPwd = function(){
+	
+	var pwd = $('#o_pwd').val();
+	var repwd = $('#o_rePwd').val();
+	if(pwd != repwd){
+		$.fn.modalAlert('两次密码必须一致！','warning');
+		return;
+	}
+	if(pwd.length < 6){
+		$.fn.modalAlert('密码长度至少为6位！','warning');
+		return;
+	}
+	
+	App.blockUI({
+		boxed : true ,
+		message: '处理中，请稍等...'
+	});
+	$.ajax({
+		url : "system_User!resetPwd.do",		
+		type : 'post',
+		data : {
+			userId : resetUserId,
+			password : hex_md5(resetUserId+pwd)
+		},
+		success : function(data) {
+			App.unblockUI();
+			if(data.success){
+				$.fn.modalMsg(data.message,'success');
+				$("#table_resource").bootstrapTable("refresh");
+				$('#resetPwdModal').modal('hide');
+				$.fn.modalAlert.closeOnCallBack();
+			}else{
+				$.fn.modalAlert(data.message,'error');
+			}
+		},
+		error : function() {
+			 App.unblockUI();
+			 $.fn.modalAlert('请求失败','error');
+		}
+	});
+	
 }

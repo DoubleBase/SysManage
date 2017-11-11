@@ -55,6 +55,9 @@ public interface MenuService {
 	
 	public Message deleteMenuFun(String funIds);
 	
+	public PagingGrid getFunRoleByfunId(int funId,int offset,int limit);
+	
+	public Message saveFunRole(int funId,String roleIds);
 }
 
 

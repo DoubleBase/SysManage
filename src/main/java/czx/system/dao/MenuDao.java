@@ -61,6 +61,11 @@ public interface MenuDao {
 	
 	public void deleteMenuFun(Map<String,Object> param);
 	
+	public List<Role> getFunRoleByfunId(int funId,int offset,int limit);
+	
+	public void deleteFunRole(int funId);
+	
+	public void addFunRole(Map<String,Object> param);
 }
 
 

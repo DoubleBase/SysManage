@@ -218,6 +218,34 @@ public class MenuServiceImpl implements MenuService {
 		return msg;
 	}
 
+	@Override
+	public PagingGrid getFunRoleByfunId(int funId, int offset, int limit) {
+		List<Role> list = menuDao.getFunRoleByfunId(funId, offset, limit);
+		return new PagingGrid(list.size(),list);
+	}
+
+	@Override
+	public Message saveFunRole(int funId, String roleIds) {
+		Message msg = new Message();
+		try{
+			List<String> list = StringUtils.strToListBySplit(roleIds, ",");
+			Map<String,Object> param = new HashMap<String,Object>();
+			param.put("funId", funId);
+			param.put("list", list);
+			menuDao.deleteFunRole(funId);
+			if(list.size()>0 && !"".equals(list.get(0))){
+				menuDao.addFunRole(param);
+			}
+			msg.setSuccess(true);
+			msg.setMessage("保存成功!");
+		}catch(Exception e){
+			e.printStackTrace();
+			msg.setSuccess(false);
+			msg.setMessage("保存失败:"+ExceptionDealUtil.getMessage(e));
+		}
+		return msg;
+	}
+
 }
 
 

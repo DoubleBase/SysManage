@@ -9,6 +9,7 @@
     <title>菜单管理</title>
     
     <script src="resource/com/js/include.js"></script>
+    <script src="resource/system/js/systoolbar.js"></script>
     <script src="resource/system/js/menu.js"></script>
 	
   </head>
@@ -27,10 +28,6 @@
 				<div class="box-footer">
 					<div id="toolbar" class="row">
 						<div class="col-sm-12" id="systoolbar-content">
-							<button class="btn btn-success" id="btn_add"><i class="fa fa-plus"></i>&nbsp;添加</button>
-							<button class="btn btn-primary" id="btn_edit"><i class="fa fa-pencil"></i>&nbsp;修改</button>
-							<button class="btn btn-danger" id="btn_delete"><i class="fa fa-minus"></i>&nbsp;删除</button>
-							<button class="btn btn-info" id="btn_bindRole"><i class="fa fa-link"></i>&nbsp;绑定角色</button>
 						</div>
 					</div>
 					<div style="display:none;">
@@ -52,16 +49,16 @@
 					<div id="toolbar" class="row">
 						<div class="col-sm-12">
 							<button type="submit" class="btn btn-success" id="addFun">
-								<i class="glyphicon glyphicon-plus"></i>添加功能
+								<i class="glyphicon glyphicon-plus"></i>&nbsp;添加功能
 							</button>
 							<button type="submit" class="btn btn-warning" id="editFun">
-								<i class="glyphicon glyphicon-pencil"></i>修改功能
+								<i class="glyphicon glyphicon-pencil"></i>&nbsp;修改功能
 							</button>
 							<button type="submit" class="btn btn-danger" id="delFun">
-								<i class="glyphicon glyphicon-minus"></i>删除功能
+								<i class="glyphicon glyphicon-minus"></i>&nbsp;删除功能
 							</button>
-							<button type="submit" class="btn btn-inverse" id="roleFun">
-								<i class="fa fa-group"></i>绑定角色
+							<button type="submit" class="btn btn-info" id="roleFun">
+								<i class="fa fa-group"></i>&nbsp;绑定角色
 							</button>
 						</div>
 					</div>
@@ -278,6 +275,37 @@
 			                          </button>
 			                      </div>
 			                      <table id="menuRole_table"></table>
+			                  </div>
+		                 	</div>
+		                </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="funRoleModal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 id="fun_modalLabel" class="modal-title">
+						绑定角色
+					</h4>
+				</div>
+				<div class="box box-success">
+					<div class="container-fluid">
+				        <div class="row">
+			               <div class="col-md-12">
+			                  <div class="box-body" style="padding-bottom:5px;">
+			                      <div id="funRole_toolbar" class="btn-group">
+			                          <button id="btn_funrole_save" type="button" class="btn btn-success">
+			                              <i class="fa fa-save"></i>&nbsp;保存
+			                          </button>
+			                      </div>
+			                      <table id="funRole_table"></table>
 			                  </div>
 		                 	</div>
 		                </div>

@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.json.JsonArray;
 
 import net.sf.json.JSONArray;
 
@@ -28,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import czx.com.controller.BaseController;
+import czx.system.bean.Fun;
 import czx.system.bean.Menu;
 import czx.system.service.MenuService;
 
@@ -57,6 +57,7 @@ public class FrameController extends BaseController{
 		return new ModelAndView("/system/frame",map);
 	}
 
+	
 }
 
 

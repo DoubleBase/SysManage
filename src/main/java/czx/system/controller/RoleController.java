@@ -14,7 +14,9 @@
  */
 package czx.system.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -49,8 +51,10 @@ public class RoleController extends BaseController {
 	private RoleService roleService;
 	
 	@RequestMapping("/system_Role!view.do")
-	public ModelAndView view(){
-		return new ModelAndView("/system/role");
+	public ModelAndView view(String menuId){
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("menuId", menuId);
+		return new ModelAndView("/system/role",map);
 	}
 	
 	@ResponseBody

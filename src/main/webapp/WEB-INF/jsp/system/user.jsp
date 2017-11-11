@@ -10,6 +10,7 @@
     
     <script src="resource/com/js/include.js"></script>
     <script src="resource/com/js/md5.js"></script>
+    <script src="resource/system/js/systoolbar.js"></script>
     <script src="resource/system/js/user.js"></script>
 	
   </head>
@@ -23,10 +24,6 @@
 				</div>
 				<div id="toolbar" class="row">
 					<div class="col-sm-12" id="systoolbar-content">
-						<button class="btn btn-success" id="btn_add"><i class="fa fa-plus"></i>&nbsp;添加</button>
-						<button class="btn btn-primary" id="btn_edit"><i class="fa fa-pencil"></i>&nbsp;修改</button>
-						<button class="btn btn-danger" id="btn_delete"><i class="fa fa-minus"></i>&nbsp;删除</button>
-						<button class="btn btn-info" id="btn_bindRole"><i class="fa fa-link"></i>&nbsp;绑定角色</button>
 					</div>
 				</div>
 				<div style="display:none;">
@@ -119,5 +116,56 @@
 			</div>
 		</div>
 		
+		<div id="resetPwdModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="reset_Label" style="height:500px;">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 id="reset_Label" class="modal-title">
+							
+						</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" role="form">
+							<div class="form-group">
+								<label for="o_pwd" class="col-sm-3 control-label">
+									用户密码
+								</label>
+								<div class="col-sm-9">
+									<input type="password" class="form-control notNull" id="o_pwd" placeholder="用户密码">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="o_rePwd" class="col-sm-3 control-label">
+									确认密码
+								</label>
+								<div class="col-sm-9">
+									<input type="password" class="form-control notNull" id="o_rePwd" placeholder="确认密码">
+								</div>
+							</div>
+							<hr>
+							<div style="font-size:14px;">
+								<label align="left">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*密码长度不小于6位
+									<br>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*初始密码默认为123456
+								</label>
+								<br>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" id="btn_reset">
+							<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;保存
+						</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;取消
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
   </body>
 </html>

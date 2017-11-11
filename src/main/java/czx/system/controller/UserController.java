@@ -14,7 +14,9 @@
  */
 package czx.system.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -48,8 +50,10 @@ public class UserController extends BaseController{
 	private UserService userService;
 	
 	@RequestMapping("/system_User!view.do")
-	public ModelAndView view(){
-		return new ModelAndView("/system/user");
+	public ModelAndView view(String menuId){
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("menuId", menuId);
+		return new ModelAndView("/system/user",map);
 	}
 	
 	@ResponseBody
@@ -75,6 +79,12 @@ public class UserController extends BaseController{
 	public Message deleteUser(User user){
 		List<User> list = JSONArray.toList(JSONArray.fromObject(request.getParameter("dataList")), User.class);
 		return userService.deleteUser(list);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/system_User!resetPwd.do")
+	public Message resetPwd(String userId,String password){
+		return userService.resetPwd(userId, password);
 	}
 	
 }

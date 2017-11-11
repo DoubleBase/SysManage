@@ -36,6 +36,8 @@ public interface UserService {
 	public Message updateUser(User user);
 	
 	public Message deleteUser(List<User> list);
+	
+	public Message resetPwd(String userId,String password);
 }
 
 

@@ -49,8 +49,9 @@ public class MenuController extends BaseController{
 	private MenuService menuService;
 	
 	@RequestMapping("/system_Menu!view.do")
-	public ModelAndView view(){
+	public ModelAndView view(String menuId){
 		Map<String,String> map = new HashMap<String,String>();
+		map.put("menuId", menuId);
 		return new ModelAndView("/system/menu",map);
 	}
 	
@@ -114,6 +115,17 @@ public class MenuController extends BaseController{
 		return menuService.deleteMenuFun(funIds);
 	}
 	
+	@ResponseBody
+	@RequestMapping("/system_Menu!getFunRoleByfunId.do")
+	public PagingGrid getFunRoleByfunId(int funId,int offset,int limit){
+		return menuService.getFunRoleByfunId(funId, offset, limit);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/system_Menu!saveFunRole.do")
+	public Message saveFunRole(int funId,String roleIds){
+		return menuService.saveFunRole(funId, roleIds);
+	}
 }
 
 

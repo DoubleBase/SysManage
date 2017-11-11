@@ -1842,6 +1842,13 @@ var addTabs = function(options) {
         url = url + pathname + "/";
         
         options.url = url + options.url;
+        
+        if(options.url.indexOf("?")!=-1){
+        	options.url = options.url + '&menuId='+options.id
+        }else{
+        	options.url = options.url + '?menuId='+options.id
+        }
+        
         id = "tab_" + options.id;
         var title = "", content = "";
         //如果TAB不存在，创建一个新的TAB

@@ -219,7 +219,7 @@ desired effect
                                 <a href="#" class="btn btn-default btn-flat">个人中心</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">退出</a>
+                                <a href="#" id="btn_loginout" class="btn btn-default btn-flat">退出</a>
                             </div>
                         </li>
                     </ul>

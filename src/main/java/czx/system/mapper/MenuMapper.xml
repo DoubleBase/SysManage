@@ -154,4 +154,24 @@
 		</foreach>
 	</delete>
 	
+	<select id="getFunRoleByfunId" resultMap="role">
+		select t1.roleid,t1.rolename,t2.checked from(
+			select c.roleid,c.rolename from sys_function a,sys_role_menu b,sys_role c where funid=#{param1} and a.menuid=b.menuid
+			and b.roleid=c.roleid
+		) t1 left join 
+		sys_role_fun t2
+		on t1.roleid=t2.roleid and t2.funid=#{param1} limit #{param2},#{param3}
+	</select>
+	
+	<delete id="deleteFunRole">
+		delete from sys_role_fun where funId = #{param1} 
+	</delete>
+	
+	<insert id="addFunRole">
+		insert into sys_role_fun (funid,roleid,checked) values
+		<foreach collection="list" index="index" item="item" separator=",">
+		 ( #{funId},#{item},1 )
+		</foreach>
+	</insert>
+	
 </mapper>

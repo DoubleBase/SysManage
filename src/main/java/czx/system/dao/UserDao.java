@@ -40,6 +40,8 @@ public interface UserDao {
 	public void updateUser(User user);
 
 	public void deleteUser(Map<String,Object> list);
+	
+	public void resetPwd(String userId,String password);
 }
 
 

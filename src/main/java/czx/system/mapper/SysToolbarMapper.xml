@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="czx.system.dao.SysToolbarDao">
+	<resultMap type="czx.system.bean.Fun" id="fun">
+		<result property="funId" column="funid" javaType="int" jdbcType="INTEGER"/>
+		<result property="funName" column="funname" javaType="String" jdbcType="VARCHAR"/>
+		<result property="icon" column="icon" javaType="String" jdbcType="VARCHAR"/>
+		<result property="qtip" column="qtip" javaType="String" jdbcType="VARCHAR"/>
+		<result property="menuId" column="menuId" javaType="int" jdbcType="INTEGER"/>
+		<result property="funtypeId" column="funtypeId" javaType="int" jdbcType="INTEGER"/>
+		<result property="orders" column="orders" javaType="int" jdbcType="INTEGER"/>
+		<result property="cls" column="cls" javaType="String" jdbcType="VARCHAR"/>
+		<result property="url" column="url" javaType="String" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<select id="getRoleFunctionList" parameterType="czx.system.bean.Fun" resultMap="fun">
+		select a.funid,funname,icon,qtip,menuId,funtypeId,orders,cls,url 
+		from sys_function a,sys_role_fun b where menuId=#{param1} and a.funid=b.funid
+        and b.roleid in (select roleid from sys_role_user where userid=#{param2}) order by a.funid
+	</select>
+	
+</mapper>

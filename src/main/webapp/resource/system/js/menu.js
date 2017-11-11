@@ -1,8 +1,8 @@
 $(function(){
 	
-	initListeners();
 	initTree();
 	buildRoleGrid();
+	buildFunRoleGrid();
 });
 
 buildRoleGrid = function(){
@@ -189,7 +189,7 @@ initListeners = function(){
 		saveMenu();
 	})
 	
-	$("#btn_bindRole").on('click',function(){
+	$("#btn_role").on('click',function(){
 		if(curMenu==null){
 			$.fn.modalAler("请选择一个要绑定角色的菜单","warning");
 			return;
@@ -223,11 +223,24 @@ initListeners = function(){
 		deleteFun();
 	})
 	$("#roleFun").on('click',function(){
+		var rows = $("#table_resource").bootstrapTable("getSelections");
+		if(rows.length==0){
+			$.fn.modalAlert("请选择要绑定角色的功能","warning");
+			return;
+		}else if(rows.length>1){
+			$.fn.modalAlert("只能选择一个功能进行绑定角色","warning");
+			return;
+		}
+		curFun = rows[0];
 		bindFunRole();
 	})
 	
 	$("#btn_fun_save").on('click',function(){
 		saveMenuFun();
+	})
+	
+	$("#btn_funrole_save").on('click',function(){
+		saveFunRole();
 	})
 
 }
@@ -268,7 +281,7 @@ initTree = function(){
 					 "valid_children" : []
 				}
 			},
-			"plugins" : ["search", "state", "types", "wholerow" ,"dnd"]
+			"plugins" : ["search", "state", "types", "wholerow"]
 		}).on('changed.jstree', function (e, data) {
 			if(data.selected.length>0){
 				curMenu = data.instance.get_node(data.selected[0]);
@@ -277,10 +290,6 @@ initTree = function(){
 			}
 		});
 		
-	$("#menutree").on('move_node.jstree', function(e,data){
-		
-		
-	})
 }
 
 showMenuModal = function(){
@@ -555,6 +564,97 @@ deleteFun = function(){
 	});
 }
 
+buildFunRoleGrid = function(){
+	$('#funRole_table').bootstrapTable({
+		url : 'system_Menu!getFunRoleByfunId.do',
+		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+		method : 'post',
+		queryParams : function(params) {
+			return {
+				offset : params.offset,
+				limit : params.limit,
+				sortName : this.sortName,
+				sortOrder : this.sortOrder,
+				funId :  curFun.funId 
+			};
+		},
+		striped : true, // 是否显示行间隔色
+		cache : false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+		pagination : true, // 是否显示分页（*）
+		sidePagination : "server", // 分页方式：client客户端分页，server服务端分页（*）
+		pageNumber : 1, // 初始化加载第一页，默认第一页
+		pageSize : 10, // 每页的记录行数（*）
+		pageList : [ 10, 20, 100 ], // 可供选择的每页的行数（*）
+		toolbar : "#funRole_toolbar",
+		clickToSelect : true, // 是否启用点击选中行
+		sortName : 'id',
+		sortOrder : 'desc',
+		// singleSelect:true,
+		showColumns : true,
+		showRefresh : true,
+		columns : [ {
+			checkbox : true,
+			width : '20'
+		},{
+			field : 'roleId',
+			title : '角色ID',
+			visible : false
+		}, {
+			field : 'roleName',
+			title : '角色名称'
+		}],
+		onDblClickCell : function(field, value, row, $element) {
+
+		},
+		onLoadSuccess : function(data){
+			for(var i=0;i<data.rows.length;i++){
+				if(data.rows[i].checked==1){
+					$('#funRole_table').bootstrapTable("check",i);
+				}
+			}
+		}
+	});
+};
+
 bindFunRole = function(){
+	$("#funRoleModal").modal('show');
+	$('#funRole_table').bootstrapTable("refresh");
+}
+
+saveFunRole = function(){
+	var rows = $('#funRole_table').bootstrapTable('getSelections');
+	var roleIds = '';
+	for(var i=0;i<rows.length;i++){
+		roleIds += rows[i].roleId+",";
+	}
+	if(roleIds.length>0){
+		roleIds = roleIds.substring(0, roleIds.length-1);
+	}
+	App.blockUI({
+		boxed : true ,
+		message: '处理中，请稍等...'
+	});
+	$.ajax({
+		url : "system_Menu!saveFunRole.do",
+		type : 'post',
+		data : {
+			funId : curFun.funId,
+			roleIds : roleIds
+		},
+		success : function(data) {
+			App.unblockUI();
+			if(data.success){
+				$("#funRoleModal").modal('hide');
+				$.fn.modalMsg(data.message,'success');
+				$('#funRole_table').bootstrapTable('refresh');
+			}else{
+				$.fn.modalAlert(data.message,'error');
+			}
+		},
+		error : function(error) {
+			 App.unblockUI();
+			 $.fn.modalAlert('请求失败','error');
+		}
+	});
 	
 }

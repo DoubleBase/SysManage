@@ -105,6 +105,21 @@ public class UserServiceImpl implements UserService {
 		return msg;
 	}
 
+	@Override
+	public Message resetPwd(String userId, String password) {
+		Message msg = new Message();
+		try{
+			userDao.resetPwd(userId,password);
+			msg.setSuccess(true);
+			msg.setMessage("密码更改成功!");
+		}catch(Exception e){
+			e.printStackTrace();
+			msg.setSuccess(false);
+			msg.setMessage("密码更改失败："+ ExceptionDealUtil.getMessage(e));
+		}
+		return msg;
+	}
+
 }
 
 

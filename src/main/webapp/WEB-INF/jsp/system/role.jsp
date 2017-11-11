@@ -9,6 +9,7 @@
     <title>角色管理</title>
     
     <script src="resource/com/js/include.js"></script>
+    <script src="resource/system/js/systoolbar.js"></script>
     <script src="resource/system/js/role.js"></script>
 
   </head>
@@ -22,11 +23,6 @@
 				</div>
 				<div id="toolbar" class="row">
 					<div class="col-sm-12" id="systoolbar-content">
-						<button class="btn btn-success" id="btn_add"><i class="fa fa-plus"></i>&nbsp;添加</button>
-						<button class="btn btn-primary" id="btn_edit"><i class="fa fa-pencil"></i>&nbsp;修改</button>
-						<button class="btn btn-danger" id="btn_delete"><i class="fa fa-minus"></i>&nbsp;删除</button>
-						<button class="btn btn-info" id="btn_bindUser"><i class="fa fa-link"></i>&nbsp;绑定用户</button>
-						<button class="btn btn-info" id="btn_bindMenu"><i class="fa fa-link"></i>&nbsp;绑定菜单</button>
 					</div>
 				</div>
 				<div style="display:none;">
