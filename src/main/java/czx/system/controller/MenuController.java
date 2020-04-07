@@ -41,7 +41,6 @@ import czx.system.service.MenuService;
  * @date 		2017年11月8日  下午4:29:49
  * @version V1.0  
  */
-@Scope("prototype")
 @Controller
 public class MenuController extends BaseController{
 	

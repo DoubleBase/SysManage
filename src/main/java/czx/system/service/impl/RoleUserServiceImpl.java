@@ -39,7 +39,6 @@ import czx.system.service.RoleUserService;
  * @date 		2017年11月9日  下午1:00:36
  * @version V1.0  
  */
-@Scope("prototype")
 @Service
 public class RoleUserServiceImpl implements RoleUserService{
 

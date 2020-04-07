@@ -17,7 +17,7 @@ package czx.com.util;
 /**
  * @ClassName: ExceptionDealUtil
  * @Description:
- * @author: <a href="mailto:yss@eastcom.com">Yangss</a>
+ * @author: <a href="mailto:czx@eastcom.com">Yangss</a>
  * @date 2017年6月19日 下午4:10:33
  * 
  */

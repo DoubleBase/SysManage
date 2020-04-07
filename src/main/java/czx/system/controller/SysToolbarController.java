@@ -35,7 +35,6 @@ import czx.system.service.SysToolbarService;
  * @date 		2017年11月11日  下午4:17:44
  * @version V1.0  
  */
-@Scope("prototype")
 @Controller
 public class SysToolbarController extends BaseController{
 

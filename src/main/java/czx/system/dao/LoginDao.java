@@ -14,9 +14,6 @@
  */
 package czx.system.dao;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Repository;
-
 import czx.system.bean.User;
 
 /**  

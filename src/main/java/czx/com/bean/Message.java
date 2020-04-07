@@ -70,6 +70,12 @@ public class Message {
 	public void setRedirectUrl(String redirectUrl) {
 		this.redirectUrl = redirectUrl;
 	}
+	
+	public void setSuccessMsg(String message){
+		this.success = true;
+		this.message = message;
+	}
+	
 }
 
 

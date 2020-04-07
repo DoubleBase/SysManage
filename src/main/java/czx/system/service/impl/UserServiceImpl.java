@@ -38,7 +38,6 @@ import czx.system.service.UserService;
  * @date 		2017年11月8日  下午10:24:26
  * @version V1.0  
  */
-@Scope("prototype")
 @Service
 public class UserServiceImpl implements UserService {
 

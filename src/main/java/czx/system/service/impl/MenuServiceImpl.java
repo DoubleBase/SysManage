@@ -44,7 +44,6 @@ import czx.system.service.MenuService;
  * @date 		2017年11月8日  下午3:59:16
  * @version V1.0  
  */
-@Scope("prototype")
 @Service
 public class MenuServiceImpl implements MenuService {
 

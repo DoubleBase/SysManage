@@ -33,7 +33,6 @@ import czx.system.service.SysToolbarService;
  * @date 		2017年11月11日  下午4:15:16
  * @version V1.0  
  */
-@Scope("prototype")
 @Service
 public class SysToolbarServiceImpl implements SysToolbarService{
 

@@ -43,7 +43,6 @@ import czx.system.service.RoleService;
  * @date 		2017年11月9日  上午10:01:24
  * @version V1.0  
  */
-@Scope("prototype")
 @Controller
 public class RoleController extends BaseController {
 

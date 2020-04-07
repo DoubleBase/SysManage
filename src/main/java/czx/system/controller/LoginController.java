@@ -54,6 +54,10 @@ public class LoginController extends BaseController{
 	@ResponseBody
 	@RequestMapping("/system_Login!login.do")
 	public Message login(User user){
+		System.out.println(user.getUserId());
+		System.out.println(user.getPassword());
+		System.out.println(request.getParameter("userId"));
+		System.out.println(request.getParameter("password"));
 		return service.login(user, session);
 	}
 	

@@ -42,7 +42,6 @@ import czx.system.service.UserService;
  * @date 		2017年11月8日  下午10:19:14
  * @version V1.0  
  */
-@Scope("prototype")
 @Controller
 public class UserController extends BaseController{
 

@@ -38,7 +38,6 @@ import czx.system.service.UserRoleService;
  * @date 		2017年11月9日  上午11:49:30
  * @version V1.0  
  */
-@Scope("prototype")
 @Controller
 public class UserRoleController extends BaseController {
 

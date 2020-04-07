@@ -36,7 +36,6 @@ import czx.system.service.LoginService;
  * @date 		2017年11月8日  下午1:23:05
  * @version V1.0  
  */
-@Scope("prototype")
 @Service
 public class LoginServiceImpl implements LoginService {
 
